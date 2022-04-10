@@ -2,17 +2,16 @@
 #imports
 import asyncio
 import os
-import nextcord
+import discord
 import random
 import mysql.connector
 from os import environ
 from geoguessr import *
 from inputs import africa, asia, na, sa, europe, oceania, misc, custom, definitions
-from nextcord import embeds
-from nextcord.ext.commands.errors import *
-from nextcord.ext import commands
-from nextcord.ext.commands import cooldown, BucketType, CommandOnCooldown
-from dev import *
+from discord import embeds
+from discord.ext.commands.errors import *
+from discord.ext import commands
+from discord.ext.commands import cooldown, BucketType, CommandOnCooldown
 
 # Variables for setting up the bot.
 TOKEN = environ['TOKEN']
@@ -48,35 +47,35 @@ async def mapsinfo(ctx):
     misc_list = (', '.join(sorted(filter(lambda i: i not in remove_char, misc))))
     custom_list = (', '.join(sorted(filter(lambda i: i not in remove_char, custom))))
 
-    page1 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page1 = discord.Embed(
+        color = discord.Color.orange(),
         title = "Maps",
         description = "Flip through all the pages to find all official GeoGuessr maps. Custom Maps are on the last page."
 
     )
-    page2 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page2 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page3 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page3 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page4 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page4 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page5 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page5 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page6 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page6 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page7 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page7 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page8 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page8 = discord.Embed(
+        color = discord.Color.orange(),
     )
-    page9 = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    page9 = discord.Embed(
+        color = discord.Color.orange(),
     )
     page1.add_field(name = "Note:" , value = "You can use any of these maps listed in this message with the -geo command. Use -help to learn the correct syntax.")
     page1.set_footer(icon_url= author.avatar_url, text= "Page 1")
@@ -156,8 +155,8 @@ async def optioninfo(ctx):
     options_list = (', '.join(sorted(filter(lambda i: i not in remove_char, options))))
     definitions_list = ('\n'.join(sorted(filter(lambda i: i not in remove_char, definitions))))
 
-    options_page = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    options_page = discord.Embed(
+        color = discord.Color.orange(),
         title = "Options",
         description = "You can make a game with custom game rules that GeoGuessr has to offer."
     )
@@ -170,8 +169,8 @@ async def optioninfo(ctx):
 
 @client.command()
 async def disclaimer(ctx):
-    disclaimer_msg = nextcord.Embed(
-        color = nextcord.Color.blue(),
+    disclaimer_msg = discord.Embed(
+        color = discord.Color.blue(),
         title = "Disclaimer",
         description = "Please keep in mind that this bot is using the GeoGuessr.com website to generate links. If the developers of GeoGuessr.com change their website at anytime, this bot has a chance of breaking."
     )
@@ -183,8 +182,8 @@ async def help_command(ctx):
     # a help command that gives instructions on how to use the bot on discord.
     author = ctx.author
 
-    help_page = nextcord.Embed(
-        color = nextcord.Color.orange(),
+    help_page = discord.Embed(
+        color = discord.Color.orange(),
         title = "Help Page",
         description = "Welcome to the help page! Learn about all the commands for this bot below!"
     )
@@ -207,8 +206,8 @@ async def help_command(ctx):
 @client.command(aliases = ["author"])
 async def credits(ctx):
     # a command that tells the user of who made this bot.
-    about = nextcord.Embed(
-        color = nextcord.Color.dark_red(),
+    about = discord.Embed(
+        color = discord.Color.dark_red(),
         title = "Credits:",
         description = "This bot was made by #senn0526" 
     )
@@ -233,8 +232,8 @@ async def geo(ctx, arg1, arg2):
                                          port = db_port)
     cursor = connection.cursor(prepared=True)
 
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.gold(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.gold(),
     )
     
     if user_map in maps and rule in options:
@@ -247,8 +246,8 @@ async def geo(ctx, arg1, arg2):
         
         game_link = game.map_generator(user_map, rule)
         
-        game_message = nextcord.Embed(
-            color = nextcord.Color.green(),
+        game_message = discord.Embed(
+            color = discord.Color.green(),
         )
         game_message.add_field(name = "Enjoy the game!", value = f"Map selected: {user_map}\nGame rule selected: {rule}\n{game_link}", inline = False)
         game_message.set_footer(icon_url= author.avatar_url, text = f"Game generated by {author.display_name} ({author})")
@@ -273,15 +272,15 @@ async def geo(ctx, arg1, arg2):
                 connection.close()
 
         if game_link == False:
-            bad_map  = nextcord.Embed(
-                color = nextcord.Color.red(),
+            bad_map  = discord.Embed(
+                color = discord.Color.red(),
             )
             bad_map.add_field(name = "Uh oh!", value = "Something went wrong, please try again.", inline = False)
             await ctx.send(embed = bad_map)
             #await ctx.send("Something went wrong, please try again.") 
     else:
-        bad_map  = nextcord.Embed(
-            color = nextcord.Color.red(),
+        bad_map  = discord.Embed(
+            color = discord.Color.red(),
         )
         bad_map.add_field(name = "Uh oh!", value = "Game link could not be generated based on your input. Reference -help for help!", inline = False)
         await ctx.send(embed = bad_map)
@@ -306,8 +305,8 @@ async def rematch(ctx):
 
  
 
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.gold(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.gold(),
     )
 
     try:
@@ -329,8 +328,8 @@ async def rematch(ctx):
             
             game_link = game.map_generator(user_map, rule)
             
-            game_message = nextcord.Embed(
-                color = nextcord.Color.green(),
+            game_message = discord.Embed(
+                color = discord.Color.green(),
             )
             game_message.add_field(name = "Enjoy the game!", value = f"Map selected: {user_map}\nGame rule selected: {rule}\n{game_link}", inline = False)
             game_message.set_footer(icon_url= author.avatar_url, text = f"Game generated by {author.display_name} ({author})")
@@ -355,15 +354,15 @@ async def rematch(ctx):
                     connection.close()     
 
             if game_link == False:
-                bad_map  = nextcord.Embed(
-                    color = nextcord.Color.red(),
+                bad_map  = discord.Embed(
+                    color = discord.Color.red(),
                 )
                 bad_map.add_field(name = "Uh oh!", value = "Something went wrong, please try again.", inline = False)
                 await ctx.send(embed = bad_map)
                 #await ctx.send("Something went wrong, please try again.") 
         else:
-            bad_map  = nextcord.Embed(
-                color = nextcord.Color.red(),
+            bad_map  = discord.Embed(
+                color = discord.Color.red(),
             )
             bad_map.add_field(name = "Uh oh!", value = "Game link could not be generated based on your input. Reference -help for help!", inline = False)
             await ctx.send(embed = bad_map)
@@ -394,8 +393,8 @@ async def current(ctx):
 
  
 
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.green(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.green(),
     )
 
     try:
@@ -439,8 +438,8 @@ async def bookmark(ctx):
     current_server_name = ctx.guild.name
     bookmark_author_id = str(ctx.author.id)
     
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.green(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.green(),
     )
 
     try:
@@ -501,8 +500,8 @@ async def saves(ctx):
     bookmark_author_id = str(ctx.author.id)
     remove_char = ["[", "]", "'"]
     
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.green(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.green(),
     )
 
     try:
@@ -555,8 +554,8 @@ async def clear(ctx):
     current_server_id = str(ctx.guild.id)
     bookmark_author_id = str(ctx.author.id)
     
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.green(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.green(),
     )
 
     try:
@@ -600,8 +599,8 @@ async def randomgame(ctx):
     user_map = random.choice(list(maps))
     rule = random.choice(list(options))
 
-    generatelink_message = nextcord.Embed(
-        color = nextcord.Color.gold(),
+    generatelink_message = discord.Embed(
+        color = discord.Color.gold(),
     )
     author = ctx.author
         
@@ -613,8 +612,8 @@ async def randomgame(ctx):
         
     game_link = game.map_generator(user_map, rule)
         
-    game_message = nextcord.Embed(
-        color = nextcord.Color.green(),
+    game_message = discord.Embed(
+        color = discord.Color.green(),
     )
     game_message.add_field(name = "Enjoy the game!", value = f"Random map selected: {user_map}\nRandom game rule selected: {rule}\n{game_link}", inline = False)
     game_message.set_footer(icon_url= author.avatar_url, text = f"Random game generated by {author.display_name} ({author})")
@@ -622,8 +621,8 @@ async def randomgame(ctx):
     print("Random game link sent")     
 
     if game_link == False:
-        bad_map  = nextcord.Embed(
-            color = nextcord.Color.red(),
+        bad_map  = discord.Embed(
+            color = discord.Color.red(),
         )
         bad_map.add_field(name = "Uh oh!", value = "Something went wrong, please try again.", inline = False)
         await ctx.send(embed = bad_map)
@@ -633,8 +632,8 @@ async def randomgame(ctx):
 @client.event
 async def on_command_error(ctx,error):
     
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
 
     if isinstance(error, commands.CommandNotFound):
@@ -653,8 +652,8 @@ async def on_command_error(ctx,error):
     
 @geo.error
 async def geo_error(ctx, error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
 
     if isinstance(error, commands.MissingRequiredArgument):
@@ -666,8 +665,8 @@ async def geo_error(ctx, error):
 
 @rematch.error
 async def rematch_error(ctx,error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
     if isinstance(error, commands.CommandInvokeError):
         errorEmbed.add_field(name = "Uh oh!", value = "Looks like the previous map configurations are not stored. Do -geo to start a game! Use -help for help with syntax.", inline = False )
@@ -678,8 +677,8 @@ async def rematch_error(ctx,error):
 
 @current.error
 async def current_error(ctx,error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
     if isinstance(error, commands.CommandInvokeError):
         errorEmbed.add_field(name = "Uh oh!", value = "Looks like there is no current game. Start one with the -geo command!", inline = False )
@@ -690,8 +689,8 @@ async def current_error(ctx,error):
 
 @bookmark.error
 async def bookmark_error(ctx,error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
     if isinstance(error, commands.CommandInvokeError):
         errorEmbed.add_field(name = "Uh oh!", value = "Something went wrong here, contact senn#0526.", inline = False )
@@ -702,8 +701,8 @@ async def bookmark_error(ctx,error):
 
 @saves.error
 async def saves(ctx,error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
     if isinstance(error, commands.CommandInvokeError):
         errorEmbed.add_field(name = "Uh oh!", value = "Something went wrong here, contact senn#0526.", inline = False )
@@ -714,8 +713,8 @@ async def saves(ctx,error):
 
 @clear.error
 async def clear(ctx,error):
-    errorEmbed = nextcord.Embed(
-        color = nextcord.Color.red()
+    errorEmbed = discord.Embed(
+        color = discord.Color.red()
     )
     if isinstance(error, commands.CommandInvokeError):
         errorEmbed.add_field(name = "Uh oh!", value = "Something went wrong here, contact senn#0526.", inline = False )
