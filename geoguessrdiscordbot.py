@@ -79,39 +79,39 @@ async def mapsinfo(ctx):
         color = nextcord.Color.orange(),
     )
     page1.add_field(name = "Note:" , value = "You can use any of these maps listed in this message with the -geo command. Use -help to learn the correct syntax.")
-    page1.set_footer(icon_url= author.avatar.url, text= "Page 1")
+    page1.set_footer(icon_url= author.avatar_url, text= "Page 1")
     
     page2.add_field(name = "Africa Maps", value = africa_list, inline = True)
     page2.add_field(name = "Example of playing an Africa Map", value = "-geo madagascar nm", inline = True)
-    page2.set_footer(icon_url= author.avatar.url, text= "Page 2")
+    page2.set_footer(icon_url= author.avatar_url, text= "Page 2")
     
     page3.add_field(name = "Asia Maps", value = asia_list, inline = True)
     page3.add_field(name = "Example of playing an Asia Map", value = "-geo india nm", inline = True)
-    page3.set_footer(icon_url= author.avatar.url, text= "Page 3")
+    page3.set_footer(icon_url= author.avatar_url, text= "Page 3")
     
     page4.add_field(name = "Europe Maps", value = europe_list, inline = True)
     page4.add_field(name = "Example of playing an Europe Map", value = "-geo uk nm", inline = True)
-    page4.set_footer(icon_url= author.avatar.url, text= "Page 4")
+    page4.set_footer(icon_url= author.avatar_url, text= "Page 4")
     
     page5.add_field(name = "Miscellaneous Maps", value = misc_list, inline = True)
     page5.add_field(name = "Example of playing a Miscellaneous Map", value = "-geo famous-places nm", inline = True)
-    page5.set_footer(icon_url= author.avatar.url, text= "Page 5")
+    page5.set_footer(icon_url= author.avatar_url, text= "Page 5")
     
     page6.add_field(name = "North America Maps", value = na_list, inline = True)
     page6.add_field(name = "Example of playing a North America Map", value = "-geo usa nm", inline = True)
-    page6.set_footer(icon_url= author.avatar.url, text= "Page 6")
+    page6.set_footer(icon_url= author.avatar_url, text= "Page 6")
 
     page7.add_field(name = "South America Maps", value = sa_list, inline = True)
     page7.add_field(name = "Example of playing a South America Map", value = "-geo peru nm", inline = True)
-    page7.set_footer(icon_url= author.avatar.url, text= "Page 7")
+    page7.set_footer(icon_url= author.avatar_url, text= "Page 7")
 
     page8.add_field(name = "Oceania Maps", value = oceania_list, inline = True)
     page8.add_field(name = "Example of playing an Oceania Map", value = "-geo australia nm", inline = True)
-    page8.set_footer(icon_url= author.avatar.url, text= "Page 8")
+    page8.set_footer(icon_url= author.avatar_url, text= "Page 8")
     
     page9.add_field(name = "Custom Maps", value = custom_list, inline = True)
     page9.add_field(name = "Example of playing a Custom Map", value = "-geo urban-world-nobrr nm", inline = True)
-    page9.set_footer(icon_url= author.avatar.url, text= "Page 9")
+    page9.set_footer(icon_url= author.avatar_url, text= "Page 9")
 
 
     help_pages = [page1, page2, page3, page4, page5, page6, page7, page8, page9]
@@ -201,7 +201,7 @@ async def help_command(ctx):
     help_page.add_field(name = "-saves", value = "The -saves command will show you all your bookmarked GeoGuessr games!", inline= False)
     help_page.add_field(name = "-clear", value = "The -clear command will clear all your bookmarked GeoGuessr games.\nCAUTION: This command will permanently delete all your bookmarks and it is non-reversible!", inline= False)
     help_page.add_field(name = "-author", value = "Learn about who made this bot :)", inline= False)
-    help_page.set_footer(icon_url = author.avatar.url, text = "\n\nPlease read -disclaimer")
+    help_page.set_footer(icon_url = author.avatar_url, text = "\n\nPlease read -disclaimer")
     await ctx.send(embed = help_page)
 
 @client.command(aliases = ["author"])
@@ -212,14 +212,14 @@ async def credits(ctx):
         title = "Credits:",
         description = "This bot was made by #senn0526" 
     )
-    about.set_thumbnail(url = "https://cdn.nextcordapp.com/avatars/239941463717314560/a_5199b98813b8a9c90327c033b3440f9e.gif?size=1024")
+    about.set_thumbnail(url = "https://cdn.discordapp.com/avatars/239941463717314560/a_5199b98813b8a9c90327c033b3440f9e.gif?size=1024")
     about.add_field(name = "Cash App", value = "$SohomSen", inline = False)
     await ctx.send(embed = about)
 
 @client.command(aliases = ["g", "game"])
 @commands.cooldown(1,60, BucketType.guild)
 async def geo(ctx, arg1, arg2):
-    # this command is the call for using the GeoGuessr.py functions. It takes in two arugments from the user in nextcord: map and rule
+    # this command is the call for using the GeoGuessr.py functions. It takes in two arugments from the user in discord: map and rule
     current_server_id = str(ctx.guild.id)
     current_server_name = ctx.guild.name
     author = ctx.author
@@ -240,7 +240,7 @@ async def geo(ctx, arg1, arg2):
     if user_map in maps and rule in options:
         
         generatelink_message.add_field(name = "Thanks for the request! Generating the GeoGuessr link now!", value = f"Map selected: {user_map}\nGame rule selected: {rule}", inline = False)
-        generatelink_message.set_footer(icon_url= author.avatar.url, text = f"Game requested by {author.display_name} ({author}) ")
+        generatelink_message.set_footer(icon_url= author.avatar_url, text = f"Game requested by {author.display_name} ({author}) ")
         await ctx.send(embed = generatelink_message)
         
         print("Game sent to generate")
@@ -251,7 +251,7 @@ async def geo(ctx, arg1, arg2):
             color = nextcord.Color.green(),
         )
         game_message.add_field(name = "Enjoy the game!", value = f"Map selected: {user_map}\nGame rule selected: {rule}\n{game_link}", inline = False)
-        game_message.set_footer(icon_url= author.avatar.url, text = f"Game generated by {author.display_name} ({author})")
+        game_message.set_footer(icon_url= author.avatar_url, text = f"Game generated by {author.display_name} ({author})")
         await ctx.send(embed = game_message)
         print("Game link sent")     
         try:
@@ -322,7 +322,7 @@ async def rematch(ctx):
         if user_map in maps and rule in options:
             
             generatelink_message.add_field(name = "Thanks for the request! Generating the GeoGuessr link with the previous configurations now!", value = f"Previous map: {user_map}\nPrevious game rule: {rule}", inline = False)
-            generatelink_message.set_footer(icon_url= author.avatar.url, text = f"Game requested by {author.display_name} ({author}) ")
+            generatelink_message.set_footer(icon_url= author.avatar_url, text = f"Game requested by {author.display_name} ({author}) ")
             await ctx.send(embed = generatelink_message)
             
             print("Game sent to generate")
@@ -333,7 +333,7 @@ async def rematch(ctx):
                 color = nextcord.Color.green(),
             )
             game_message.add_field(name = "Enjoy the game!", value = f"Map selected: {user_map}\nGame rule selected: {rule}\n{game_link}", inline = False)
-            game_message.set_footer(icon_url= author.avatar.url, text = f"Game generated by {author.display_name} ({author})")
+            game_message.set_footer(icon_url= author.avatar_url, text = f"Game generated by {author.display_name} ({author})")
             await ctx.send(embed = game_message)
             print("Game link sent")
             try:
@@ -410,7 +410,7 @@ async def current(ctx):
         print(f"The following was retrieved from the database successfully: Server: {current_server_name}, Map: {user_map}, Rule: {rule}, Game link: {last_link}")
 
         generatelink_message.add_field(name = "Here is the current map being played:", value = f"Current map: {user_map}\nGame rule selected: {rule}\n{last_link}", inline = False)
-        generatelink_message.set_footer(icon_url= author.avatar.url, text = f"Enjoy the game {author.display_name} ({author})! ")
+        generatelink_message.set_footer(icon_url= author.avatar_url, text = f"Enjoy the game {author.display_name} ({author})! ")
         await ctx.send(embed = generatelink_message)
             
         print("Game successfully retrieved")  
@@ -471,9 +471,9 @@ async def bookmark(ctx):
         connection.commit()
         generatelink_message.add_field(name = "GeoGuessr Game Bookmarked!", value = f"You bookmarked the last GeoGuessr Game that was generated:\n{last_link}", inline = False)
         if bookmark_count > 1:
-            generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmarks stored! ")
+            generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmarks stored! ")
         else:
-            generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmark stored! ")
+            generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmark stored! ")
         await ctx.send(embed = generatelink_message)
 
 
@@ -524,13 +524,13 @@ async def saves(ctx):
 
             generatelink_message.add_field(name = "Bookmarked Games", value = f"Here are all your bookmarked GeoGuessr Games:\n{game_list}", inline = False)
             if bookmark_count > 1:
-                generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmarks stored! ")
+                generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmarks stored! ")
             else:
-                generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmark stored! ")
+                generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have {bookmark_count} bookmark stored! ")
             await ctx.send(embed = generatelink_message)
         else:
             generatelink_message.add_field(name = "No Bookmarked Games!", value = "You have no bookmarked games!", inline = False)
-            generatelink_message.set_footer(icon_url= author.avatar.url, text = "To bookmark the latest GeoGuessr games, use -bookmark")
+            generatelink_message.set_footer(icon_url= author.avatar_url, text = "To bookmark the latest GeoGuessr games, use -bookmark")
             await ctx.send(embed = generatelink_message)
 
     except mysql.connector.Error as error:
@@ -576,14 +576,14 @@ async def clear(ctx):
 
             if bookmark_count > 1:
                 generatelink_message.add_field(name = "Bookmarks cleared!", value = f"You successfully cleared {bookmark_count} bookmarks", inline = False)
-                generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have no bookmarks anymore.")
+                generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have no bookmarks anymore.")
             else:
                 generatelink_message.add_field(name = "Bookmarks cleared!", value = f"You successfully cleared {bookmark_count} bookmark", inline = False)
-                generatelink_message.set_footer(icon_url= author.avatar.url, text = f"{author.display_name} ({author}), you have no bookmarks anymore.")
+                generatelink_message.set_footer(icon_url= author.avatar_url, text = f"{author.display_name} ({author}), you have no bookmarks anymore.")
             await ctx.send(embed = generatelink_message)
         else:
             generatelink_message.add_field(name = "No Bookmarked Games!", value = "You have no bookmarked games!", inline = False)
-            generatelink_message.set_footer(icon_url= author.avatar.url, text = "To bookmark the latest GeoGuessr games, use -bookmark")
+            generatelink_message.set_footer(icon_url= author.avatar_url, text = "To bookmark the latest GeoGuessr games, use -bookmark")
             await ctx.send(embed = generatelink_message)
     except mysql.connector.Error as error:
         print("Uh oh. Something went wrong. {}".format(error))
@@ -606,7 +606,7 @@ async def randomgame(ctx):
     author = ctx.author
         
     generatelink_message.add_field(name = "Thanks for the request! Generating random GeoGuessr link now!", value = f"Random map selected: {user_map}\nRandom game rule selected: {rule}", inline = False)
-    generatelink_message.set_footer(icon_url= author.avatar.url, text = f"Random game requested by {author.display_name} ({author}) ")
+    generatelink_message.set_footer(icon_url= author.avatar_url, text = f"Random game requested by {author.display_name} ({author}) ")
     await ctx.send(embed = generatelink_message)
         
     print("Random game sent to generate")
@@ -617,7 +617,7 @@ async def randomgame(ctx):
         color = nextcord.Color.green(),
     )
     game_message.add_field(name = "Enjoy the game!", value = f"Random map selected: {user_map}\nRandom game rule selected: {rule}\n{game_link}", inline = False)
-    game_message.set_footer(icon_url= author.avatar.url, text = f"Random game generated by {author.display_name} ({author})")
+    game_message.set_footer(icon_url= author.avatar_url, text = f"Random game generated by {author.display_name} ({author})")
     await ctx.send(embed = game_message)
     print("Random game link sent")     
 
@@ -645,7 +645,7 @@ async def on_command_error(ctx,error):
     if isinstance(error, CommandOnCooldown):
         author = ctx.author
         errorEmbed.add_field(name = f"Slow down {ctx.message.author.display_name}!", value = f"Bot is on cooldown. Use the bot in {error.retry_after:,.2f} seconds!", inline = False)
-        errorEmbed.set_footer(icon_url = author.avatar.url, text = f"Just relax, {author.display_name} ({author}) :)")
+        errorEmbed.set_footer(icon_url = author.avatar_url, text = f"Just relax, {author.display_name} ({author}) :)")
         await ctx.send(embed = errorEmbed)
     
     else: 
