@@ -1,8 +1,5 @@
 # GeoGuessr-Bot (w/ Discord Integration!)
 
-Update 5/17/2022
-This bot is severely broken, however I have been working on this project from time to time. Looking up update the GeoGuessr link generation code, but I am probably discontinuing the discord integration as I do not intend to make a separate GeoGuessr bot at this time.
-
 A bot that allows users to create GeoGuessr game links automatically.
 
 This bot can be run though CLI or can be run as a discord bot!
@@ -188,6 +185,9 @@ https://www.geoguessr.com/challenge/wYjPeOmTi2oDmZ7K
 ### Final Comments
 This bot is still very much in development. If you have any suggestions or bug reports, please let me know!
 _______________________________________________________________________________
+
+## Update 5/17/2022
+This bot is severely broken, however I have been working on this project from time to time. Looking up update the GeoGuessr link generation code, but I am probably discontinuing the discord integration as I do not intend to make a separate GeoGuessr bot at this time.
 
 ## Release Version 0.2-alpha
 Version 0.2-alpha features the integration of the Discord API! This GeoGuessr bot can now be run as a discord bot!
