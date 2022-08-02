@@ -137,12 +137,23 @@ class GeoGuessorBot():
         time.sleep(2) 
     
     def no_move_zoom_pan(self):
-        # This function is called when the game setting is set to no move, no pan, no zoom by the user.
-        nzSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//label[normalize-space()='No move, no pan, no zoom']")))
-        nzSelect.click()   
+        # none allowed
+        # This function is called when the game setting is set to no move, no pan, no zoom by the user
+        GeoGuessorBot.moveReset(self)
+        GeoGuessorBot.panReset(self)
+        GeoGuessorBot.zoomReset(self)
+
+        nzSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Zooming is allowed']")))
+        nzSelect.click()
+        nmSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Moving is allowed']")))
+        nmSelect.click()
+        npSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Panning is allowed']")))
+        npSelect.click()
+        time.sleep(1)
         invite = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@type='button']")))
         invite.click()
-        time.sleep(5)
+        time.sleep(2) 
+
 
     def game_setting(self):
         # Function for checking if the game rule menu is being displayed. Returns False if the element is not found.
