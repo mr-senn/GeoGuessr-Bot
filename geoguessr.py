@@ -86,7 +86,7 @@ class GeoGuessorBot():
     
     def default(self):
         # This function is called when the game setting is set to default by the user. 
-        invite = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@type='button']")))
+        invite = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@type='button']//div[@class='button_wrapper__NkcHZ']")))
         invite.click()
         time.sleep(5)
 
