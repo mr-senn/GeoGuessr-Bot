@@ -201,6 +201,14 @@ class GeoGuessorBot():
         except NoSuchElementException:
             return True
         return False
+        
+    def checkMap(map):
+        connection = mysql.connector.connect(host= db_host,
+                                         database= db_database,
+                                         user= db_user,
+                                         password = db_password,
+                                         port = db_port)
+        get_map_cursor = connection.cursor(prepared=True)
 
     
     def map_generator(self, map, option):
