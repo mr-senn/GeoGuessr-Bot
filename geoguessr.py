@@ -92,11 +92,18 @@ class GeoGuessorBot():
 
     def no_move(self):
         # This function is called when the game setting is set to no move by the user.
-        nmSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//label[normalize-space()='No move']")))
+        #pan zoom allowed
+
+        GeoGuessorBot.moveReset(self)
+        GeoGuessorBot.panReset(self)
+        GeoGuessorBot.zoomReset(self)
+
+        nmSelect = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Moving is allowed']")))
         nmSelect.click()
+        time.sleep(1)
         invite = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//button[@type='button']")))
         invite.click()
-        time.sleep(5)    
+        time.sleep(2)    
     
     def no_zoom(self):
         # This function is called when the game setting is set to no zoom by the user.
