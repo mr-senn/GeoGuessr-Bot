@@ -221,17 +221,19 @@ class GeoGuessorBot():
                 return [map_name, map_url]
             else:
                 return False
-            self.driver.get("https://www.geoguessr.com/maps/" + map_final + "/play")
-            challenge = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='radio-box']//div[@class='radio-box__illustration']")))
-            challenge.click()
-        if map_checked == False:
+        except mysql.connector.Error as error:
+            print("Uh oh. Something went wrong. {}".format(error))
+        finally:
+            if connection.is_connected():
+                get_map_cursor.close()
+    
+    def checkOptions(option):
+        game_options = ["default", "nm", "nz", "nmz", "nmpz"]
+        if option not in game_options:
             return False
+        else:
+            return option
 
-        if option in options:
-            if option == "default":
-                # Generates game link with default settings.
-                if GeoGuessorBot.game_setting(self) == True:
-                    defaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//span[@class='checkbox__mark checkbox__mark--dark']")))
                     defaultBtn.click()
                     GeoGuessorBot.default(self)
                 else:
