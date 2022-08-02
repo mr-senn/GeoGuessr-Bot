@@ -35,14 +35,18 @@ s = Service(ChromeDriverManager().install())
 
 class GeoGuessorBot():
     def __init__(self):
+        
         # Initializes Chrome driver and browser functions
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument('--no-sandbox')      
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        self.driver = webdriver.Chrome(CHROMEDRIVER_PATH, options = chrome_options)
+        #chrome_options.add_argument("--headless")
+        #chrome_options.add_argument('--no-sandbox')      
+        #chrome_options.add_argument('--disable-dev-shm-usage')
+        #chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("log-level=3")
+        self.driver = webdriver.Chrome(service = s, options = chrome_options)
         self.wait = WebDriverWait(self.driver,20)
         print("Bot Initialized")
+        
     
     def login(self):
         # Function for logging in GeoGuessrPro account.
