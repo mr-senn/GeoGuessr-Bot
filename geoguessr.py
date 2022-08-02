@@ -63,6 +63,26 @@ class GeoGuessorBot():
 
         print("GeoGuessr login successful.")
         time.sleep(1)
+
+    def moveReset(self):
+        try:
+            self.driver.find_element(by = By.XPATH, value = "//img[@alt='Moving is allowed']")
+        except NoSuchElementException:
+            resetMove = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Moving is not allowed']")))
+            resetMove.click()
+
+    def panReset(self):
+        try:
+            self.driver.find_element(by = By.XPATH, value = "//img[@alt='Panning is allowed']")
+        except NoSuchElementException:
+            resetPan = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Panning is not allowed']")))
+            resetPan.click()
+    def zoomReset(self):
+        try:
+            self.driver.find_element(by = By.XPATH, value = "//img[@alt='Zooming is allowed']")
+        except NoSuchElementException:
+            resetZoom = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//img[@alt='Zooming is not allowed']")))
+            resetZoom.click()
     
     def default(self):
         # This function is called when the game setting is set to default by the user. 
