@@ -210,16 +210,16 @@ class GeoGuessorBot():
                                          port = db_port)
         get_map_cursor = connection.cursor(prepared=True)
 
-    
-    def map_generator(self, map, option):
-        # Function for generating GeoGuessr game links
-        map_checked = checkMap(map) # checks for a valid map
-        if map_checked in maps:
-            map_final = checkCustom(map) # checks for custom GeoGuessr Maps (unofficial ones have unique hash values instead of strings)
-            option = checkOptions(option) # checks for a valid rule option
-            if option in options:
-                pass
-            elif option == False:
+        get_map_query = """SELECT map, urlStub FROM geo WHERE map = %s"""
+        try:
+            map_check = (map,)
+            get_map_cursor.execute(get_map_query,map_check)
+            map_db = get_map_cursor.fetchone()
+            if map_db:
+                map_name = map_db[0]
+                map_url = map_db[1]
+                return [map_name, map_url]
+            else:
                 return False
             self.driver.get("https://www.geoguessr.com/maps/" + map_final + "/play")
             challenge = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='radio-box']//div[@class='radio-box__illustration']")))
