@@ -154,6 +154,45 @@ class GeoGuessorBot():
         invite.click()
         time.sleep(2) 
 
+    def time_slider(self,time_num):
+        num = int(time_num)
+
+        if num % 10 == 0:
+            resetSlider = self.driver.find_element(by = By.XPATH, value = "//div[@class='styles_handle__zYRZ7']")
+            ActionChains(self.driver).drag_and_drop_by_offset(resetSlider, -228, 0).perform()
+            time.sleep(1)
+
+            input = int(num / 10)
+            list_num = int(input+1)
+            range_num = []
+            for i in range(list_num):
+                range_num.append(round(i*3.6))
+            pixel = 1 + int(range_num[input])
+            print(pixel)
+            
+            timerSlider = self.driver.find_element(by = By.XPATH, value = "//div[@class='styles_handle__zYRZ7']")
+            ActionChains(self.driver).drag_and_drop_by_offset(timerSlider, pixel , 0).perform()
+            time.sleep(1)
+        if num % 10 != 0:
+
+            resetSlider = self.driver.find_element(by = By.XPATH, value = "//div[@class='styles_handle__zYRZ7']")
+            ActionChains(self.driver).drag_and_drop_by_offset(resetSlider, -228, 0).perform()
+            time.sleep(1)
+
+            rounded_num = round(num/10)*10
+            input = int(rounded_num / 10)
+            list_num = int(input+1)
+            range_num = []
+            for i in range(list_num):
+                range_num.append(round(i*3.6))
+            pixel = 1 + int(range_num[input])
+            print(pixel)
+            
+            timerSlider = self.driver.find_element(by = By.XPATH, value = "//div[@class='styles_handle__zYRZ7']")
+            ActionChains(self.driver).drag_and_drop_by_offset(timerSlider, pixel , 0).perform()
+            time.sleep(1)
+        else:
+            return False
 
     def game_setting(self):
         # Function for checking if the game rule menu is being displayed. Returns False if the element is not found.
