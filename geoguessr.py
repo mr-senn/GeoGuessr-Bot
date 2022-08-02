@@ -168,20 +168,26 @@ class GeoGuessorBot():
 
 
 def main():
-    browser = GeoGuessorBot() #initiates GeoGuessrBot
+    browser = GeoGuessorBot() #initiates GeoGuessrBotr
     browser.login()
-    map,option = input("Enter the Map you want and rule: ").split() 
-    geoguessrlink = browser.map_generator(map,option) # Generates link
-    if geoguessrlink == False: # Checks if the game link was properly generated. If not, then error is sent to the user.
-        print("Error Occured. Either the map or rule is incorrect. Please run program again.")
-        sys.exit()
-    else:
-        print("Game link generated:") 
-        print(geoguessrlink) #User receives the generated game link
-        exitKey = input("Press X to close program: ")
-        if exitKey == "x":
-            sys.exit()
-
+    
+    while True:
+        map,option= input("Enter the Map you want and rule: ").split() 
+        timer= input("Enter Time Limit: ")
+        geoguessrlink = browser.map_generator(map,option,timer) # Generates link
+        if geoguessrlink == False: # Checks if the game link was properly generated. If not, then error is sent to the user.
+            print("Error Occured. Either the map or rule is incorrect. Please try again")
+            return True
+        else:
+            print("Game link generated:") 
+            print(geoguessrlink) #User receives the generated game link
+            exitKey = input("Replay? y/n ").lower()
+            print(exitKey)
+            if exitKey == "y":
+                pass
+            if exitKey == "n":
+                raise SystemExit
+            
 
 if __name__ == "__main__":
     main()
