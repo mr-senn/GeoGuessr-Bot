@@ -1,8 +1,7 @@
 """ 
 GeoGuessr Bot
 Author: Sohom Sen
-Email: sohom416@hotmail.com
-Current Version: 0.2-alpha
+Current Version: 1.0 -beta
 """
 
 #imports
