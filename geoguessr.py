@@ -20,10 +20,18 @@ import time
 from os import environ
 
 # Environment varible declarations
-GOOGLE_CHROME_PATH = environ['GOOGLE_CHROME_PATH']
-CHROMEDRIVER_PATH = environ['CHROMEDRIVER_PATH']
-USERNAME = environ['USERNAME']
-PASSWORD = environ['PASSWORD']
+#GOOGLE_CHROME_PATH = environ['GOOGLE_CHROME_PATH']
+USERNAME = environ['GEO_USERNAME']
+PASSWORD = environ['GEO_PASSWORD']
+
+db_host = environ['DB_HOST']
+db_database = environ['DB_DATABASE']
+db_user = environ['DB_USER']
+db_password = environ['DB_PASSWORD']
+db_port = environ['DB_PORT']
+
+s = Service(ChromeDriverManager().install())
+
 
 class GeoGuessorBot():
     def __init__(self):
