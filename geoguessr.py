@@ -234,53 +234,84 @@ class GeoGuessorBot():
         else:
             return option
 
+    def map_generator(self, map, option, timer):
+        map_check = GeoGuessorBot.checkMap(map)
+        if map_check[0] == map:
+            self.driver.get("https://www.geoguessr.com/maps/" + map_check[1] + "/play")
+            challenge = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='radio-box_root__ka_9S']//div[@class='radio-box_illustration___Yw_M']")))
+            challenge.click()
+        if map_check == False:
+            return False
+        
+        rule_check =  GeoGuessorBot.checkOptions(option)
+        if rule_check == False:
+            return False
+        else:
+            if rule_check == "default":
+                if GeoGuessorBot.game_setting(self) == False:
+                    defaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='game-settings_default__DIBgs']//div//input[@type='checkbox']")))
                     defaultBtn.click()
                     GeoGuessorBot.default(self)
                 else:
                     GeoGuessorBot.default(self)
-                link = self.driver.find_element_by_xpath("//input[@name='copy-link']").get_attribute('value')
+                link = self.driver.find_element(by = By.XPATH, value = "//input[@name='copy-link']").get_attribute('value')
                 return link
-            elif option == "nm":
-                # Generates game link with the no move setting.
-                if GeoGuessorBot.game_setting(self) == True:
+            elif rule_check == "nm":
+                if GeoGuessorBot.game_setting(self):
+                    noDefaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='game-settings_default__DIBgs']//div//input[@type='checkbox']")))
+                    noDefaultBtn.click()
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
                     GeoGuessorBot.no_move(self)
                 else:
-                    noDefault = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//span[@class='checkbox__mark checkbox__mark--dark']")))
-                    noDefault.click()
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
                     GeoGuessorBot.no_move(self)
-                link = self.driver.find_element_by_xpath("//input[@name='copy-link']").get_attribute('value')
-                return link
-            elif option == "nz":
-                # Generates game link with the no move zoom setting.
-                if GeoGuessorBot.game_setting(self) == True:
-                    GeoGuessorBot.no_zoom(self)
-                else:
-                    noDefault = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//span[@class='checkbox__mark checkbox__mark--dark']")))
-                    noDefault.click()
-                    GeoGuessorBot.no_zoom(self)
-                link = self.driver.find_element_by_xpath("//input[@name='copy-link']").get_attribute('value')
-                return link
-            elif option == "nmz":
-                # Generates game link with the no move, no zoom setting.
-                if GeoGuessorBot.game_setting(self) == True:
-                    GeoGuessorBot.no_move_zoom(self)
-                else:
-                    noDefault = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//span[@class='checkbox__mark checkbox__mark--dark']")))
-                    noDefault.click()
-                    GeoGuessorBot.no_move_zoom(self)
-                link = self.driver.find_element_by_xpath("//input[@name='copy-link']").get_attribute('value')
-                return link
-            elif option == "nmpz":
-                # Generates game link with the no move, no pan, no zoom setting.
-                if GeoGuessorBot.game_setting(self) == True:
-                    GeoGuessorBot.no_move_zoom_pan(self)
-                else:
-                    noDefault = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//span[@class='checkbox__mark checkbox__mark--dark']")))
-                    noDefault.click()
-                    GeoGuessorBot.no_move_zoom_pan(self)
-                link = self.driver.find_element_by_xpath("//input[@name='copy-link']").get_attribute('value')
-                return link
 
+                link = self.driver.find_element(by = By.XPATH, value = "//input[@name='copy-link']").get_attribute('value')
+                return link
+            elif rule_check == "nz":
+                if GeoGuessorBot.game_setting(self):
+                    noDefaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='game-settings_default__DIBgs']//div//input[@type='checkbox']")))
+                    noDefaultBtn.click()
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_zoom(self)
+                else:
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_zoom(self)
+
+                link = self.driver.find_element(by = By.XPATH, value = "//input[@name='copy-link']").get_attribute('value')
+                return link
+            elif rule_check == "nmz":
+                if GeoGuessorBot.game_setting(self):
+                    noDefaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='game-settings_default__DIBgs']//div//input[@type='checkbox']")))
+                    noDefaultBtn.click()
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_move_zoom(self)
+                else:
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_move_zoom(self)
+
+                link = self.driver.find_element(by = By.XPATH, value = "//input[@name='copy-link']").get_attribute('value')
+                return link
+            elif rule_check == "nmpz":
+                if GeoGuessorBot.game_setting(self):
+                    noDefaultBtn = self.wait.until(EC.element_to_be_clickable((By.XPATH,"//div[@class='game-settings_default__DIBgs']//div//input[@type='checkbox']")))
+                    noDefaultBtn.click()
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_move_zoom_pan(self)
+                else:
+                    GeoGuessorBot.time_slider(self, timer)
+                    time.sleep(1)
+                    GeoGuessorBot.no_move_zoom_pan(self)
+
+                link = self.driver.find_element(by = By.XPATH, value = "//input[@name='copy-link']").get_attribute('value')
+                return link    
 
 
 def main():
