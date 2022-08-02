@@ -51,13 +51,14 @@ class GeoGuessorBot():
     def login(self):
         # Function for logging in GeoGuessrPro account.
         self.driver.get("https://www.geoguessr.com/")
-        loginButton = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[normalize-space()='Log in']")))
-        loginButton.click()
+        alreadyButton = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[normalize-space()='Already have an account?']")))
+        alreadyButton.click()
+        time.sleep(3)
         emailField = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='email']")))
         emailField.send_keys(USERNAME)
         passField = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='password']")))
         passField.send_keys(PASSWORD)
-        enter = self.driver.find_element_by_xpath("//button[@type='submit']")
+        enter = self.driver.find_element(by = By.XPATH, value = "//button[@type='submit']")
         enter.click()
 
         print("GeoGuessr login successful.")
