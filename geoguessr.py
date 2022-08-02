@@ -197,10 +197,10 @@ class GeoGuessorBot():
     def game_setting(self):
         # Function for checking if the game rule menu is being displayed. Returns False if the element is not found.
         try:
-            self.driver.find_element_by_xpath("//div[@class='game-settings__detailed-settings']")
+            self.driver.find_element(by = By.CLASS_NAME, value = "game-options_optionGroup__qNKx1")
         except NoSuchElementException:
-            return False
-        return True
+            return True
+        return False
 
     
     def map_generator(self, map, option):
