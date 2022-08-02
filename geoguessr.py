@@ -64,6 +64,9 @@ class GeoGuessorBot():
         print("GeoGuessr login successful.")
         time.sleep(1)
 
+    def close(self):
+        self.driver.quit()
+
     def moveReset(self):
         try:
             self.driver.find_element(by = By.XPATH, value = "//img[@alt='Moving is allowed']")
