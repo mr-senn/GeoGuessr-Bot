@@ -236,7 +236,11 @@ class GeoGuessorBot():
             return False
         else:
             return option
-
+            
+    def checkTimer(timer_input):
+        if isinstance(timer_input, int) == False:
+            return False
+    
     def map_generator(self, map, option, timer):
         map_check = GeoGuessorBot.checkMap(map)
         if map_check[0] == map:
