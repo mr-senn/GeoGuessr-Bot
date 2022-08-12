@@ -242,6 +242,9 @@ class GeoGuessorBot():
             return False
     
     def map_generator(self, map, option, timer):
+        time_check = GeoGuessorBot.checkTimer(timer)
+        if time_check == False:
+            return False
         map_check = GeoGuessorBot.checkMap(map)
         if map_check[0] == map:
             self.driver.get("https://www.geoguessr.com/maps/" + map_check[1] + "/play")
@@ -249,7 +252,6 @@ class GeoGuessorBot():
             challenge.click()
         if map_check == False:
             return False
-        
         rule_check =  GeoGuessorBot.checkOptions(option)
         if rule_check == False:
             return False
