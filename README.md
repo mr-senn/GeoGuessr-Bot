@@ -183,7 +183,7 @@ https://www.geoguessr.com/challenge/wYjPeOmTi2oDmZ7K
     
   
 ### Final Comments
-This bot is still very much in development. If you have any suggestions or bug reports, please let me know!
+This project is forever discontinued. It was a good run. 
 _______________________________________________________________________________
 
 ## Update 5/17/2022
